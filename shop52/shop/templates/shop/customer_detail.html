@@ -1,0 +1,7 @@
+<h1> {{customer.first_name}} {{customer.last_name}}</h1>
+<p>{{customer.first_name}}</p>
+<p>Email {{customer.email}}</p>
+<p>Фамилия {% if customer.last_name %}Есть{% else %}Отсутствует{% endif %}</p>
+<a href="{% url 'customer_list'%}"> Вернуться к списку клиентов</a>
+<a href="{% url 'customer_update' customer.pk%}"> Редактировать</a>
+<a href="{% url 'customer_delete' customer.pk%}"> Удалить </a>

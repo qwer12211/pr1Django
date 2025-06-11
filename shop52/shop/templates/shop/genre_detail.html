@@ -1,0 +1,6 @@
+<h1> {{genre.name}}</h1>
+<p>{{genre.name}}</p>
+<p>Название {% if genre.name %}Есть{% else %}Отсутствует{% endif %}</p>
+<a href="{% url 'genre_list'%}"> Вернуться к списку жанров</a>
+<a href="{% url 'genre_update' genre.pk%}"> Редактировать</a>
+<a href="{% url 'genre_delete' genre.pk%}"> Удалить </a>

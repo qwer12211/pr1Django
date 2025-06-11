@@ -1,0 +1,11 @@
+<h1>Жанры</h1>
+<a href="{% url 'genre_create' %}">Добавить новый жанр</a>
+<ul>
+    {% for genre in genres %}
+        <li>
+            <a href="{% url 'genre_detail' genre.pk %}">{{ genre.name }}</a>
+            <a href="{% url 'genre_update' genre.pk %}">Редактировать</a>
+            <a href="{% url 'genre_delete' genre.pk %}">Удалить</a>
+        </li>
+    {% endfor %}
+</ul>

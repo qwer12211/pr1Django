@@ -1,0 +1,7 @@
+<h1>{% if form.instance.pk %} Реадктировать позицию {% else %} добавить новую позицию{% endif %} </h1>
+<form method ="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type = "submit">Сохранить</button>
+</form>
+<a href= "{% url 'publisher_list' %}"> вернуть к списку издательств</a> 

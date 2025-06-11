@@ -1,0 +1,11 @@
+<h1> Книги</h1>
+<a href="{% url 'book_create' %}"> Добавить позицию новую</a>
+<ul>
+    {% for book in books %}
+        <li>
+            <a href="{% url 'book_detail' book.pk %}"> {{ book.title }} ({{ book.price }} руб.)</a>
+            <a href="{% url 'book_update' book.pk %}"> Редактировать</a>
+            <a href="{% url 'book_delete' book.pk %}"> Удалить </a>
+        </li>
+    {% endfor %}
+</ul>

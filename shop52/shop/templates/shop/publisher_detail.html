@@ -1,0 +1,6 @@
+<h1> {{publisher.name}}</h1>
+<p>{{publisher.name}}</p>
+<p>Название {% if publisher.name %}Есть{% else %}Отсутствует{% endif %}</p>
+<a href="{% url 'publisher_list'%}"> Вернуться к списку издательств</a>
+<a href="{% url 'publisher_update' publisher.pk %}"> Редактировать</a>
+<a href="{% url 'publisher_delete' publisher.pk %}"> Удалить </a>

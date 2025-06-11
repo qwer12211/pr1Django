@@ -1,0 +1,8 @@
+<h1> {{book.title}}</h1>
+<p>{{book.title}}</p>
+<p>Цена {{book.price}}</p>
+<p>Обложка {% if book.cover_image %}Есть{% else %}Отсутствует{% endif %}</p>
+<image src="{{book.cover_image.url}}" alt="{{book.title}}">
+<a href="{% url 'book_list'%}"> Вернуться к списку книг</a>
+<a href="{% url 'book_update' book.pk%}"> Редактировать</a>
+<a href="{% url 'book_delete' book.pk%}"> Удалить </a>

@@ -1,0 +1,11 @@
+<h1>Клиенты</h1>
+<a href="{% url 'customer_create' %}">Добавить нового клиента</a>
+<ul>
+    {% for customer in customers %}
+        <li>
+            <a href="{% url 'customer_detail' customer.pk %}">{{ customer.first_name }} {{ customer.last_name }} ({{ customer.email }})</a>
+            <a href="{% url 'customer_update' customer.pk %}">Редактировать</a>
+            <a href="{% url 'customer_delete' customer.pk %}">Удалить</a>
+        </li>
+    {% endfor %}
+</ul>

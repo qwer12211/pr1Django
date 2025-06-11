@@ -8,6 +8,7 @@
             background-color: #f5f5f5;
             color: #333;
             line-height: 1.6;
+            font-family: Arial, sans-serif;
         }
         
         header, footer {
@@ -20,12 +21,18 @@
             display: flex;
             list-style: none;
             gap: 1.5rem;
+            margin: 0;
+            padding: 0;
         }
         
         nav a {
             color: white;
             text-decoration: none;
             font-weight: bold;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
         }
         
         main {
@@ -53,6 +60,13 @@
             border-radius: 8px;
             padding: 1rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
         }
         
         .btn {
@@ -62,34 +76,114 @@
             padding: 0.5rem 1rem;
             border-radius: 4px;
             text-decoration: none;
-            margin-top: 0.5rem;
+            margin: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #3498db;
+        }
+        
+        .btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .crud-section {
+            margin-bottom: 2rem;
+        }
+        
+        .crud-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .crud-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
     </style>
-
-  
-   
 </head>
 <body>
     <header>
         <nav>
             <ul>
                 <li><a href="{% url 'first_view' %}">Главная</a></li>
-                <li><a href="{% url 'contact_view' %}">О компании</a></li>
+                <li><a href="{% url 'company_view' %}">О компании</a></li>
                 <li><a href="{% url 'items_view' %}">Товары</a></li>
                 <li><a href="{% url 'cart_view' %}">Корзина</a></li>
+                <li><a href="{% url 'contact_view' %}">Контакты</a></li>
+                <li><a href="{% url 'search_view' %}">Поиск</a></li>
+                <li><a href="{% url 'tovar_view' %}">Товар</a></li>
+                <li><a href="{% url 'categories_view' %}">Категории</a></li>
             </ul>
         </nav>
     </header>
     
     <main>
         <section class="hero">
-            <h1>Добро пожаловать в Мир Танков</h1>
-            <p>Лучшие прем аккаунты по доступным ценам</p>
+            <h1>Добро пожаловать</h1>
+            <p>Лучший товар по доступным ценам</p>
         </section>
         
-       
+        <section class="crud-section">
+            <h2>Управление авторами</h2>
+            <div class="crud-buttons">
+                <a href="{% url 'author_list' %}" class="btn">Список авторов</a>
+            </div>
+        </section>
+        
+        <section class="crud-section">
+            <h2>Управление книгами</h2>
+            <div class="crud-buttons">
+                <a href="{% url 'book_list' %}" class="btn">Список книг</a>
+            </div>
+        </section>
+        
+        <section class="crud-section">
+            <h2>Управление клиентами</h2>
+            <div class="crud-buttons">
+                <a href="{% url 'customer_list' %}" class="btn">Список клиентов</a>
+            </div>
+        </section>
+        
+        <section class="crud-section">
+            <h2>Управление жанрами</h2>
+            <div class="crud-buttons">
+                <a href="{% url 'genre_list' %}" class="btn">Список жанров</a>
+            </div>
+        </section>
+        
+        <section class="crud-section">
+            <h2>Управление издателями</h2>
+            <div class="crud-buttons">
+                <a href="{% url 'publisher_list' %}" class="btn">Список издателей</a>
+            </div>
+        </section>
+        
+        <section class="products">
+            {% for book in books %}
+                <div class="product-card">
+                    {% if book.photo %}
+                        <img src="{{ book.photo.url }}" alt="{{ book.title }}" width="150">
+                    {% else %}
+                        <p>Нет изображения</p>
+                    {% endif %}
+                    <h3>{{ book.title }}</h3>
+                    <p>{{ book.author.first_name }} {{ book.author.last_name }}</p>
+                    <a href="{% url 'book_detail' pk=book.pk %}" class="btn">Подробнее</a>
+                    <a href="{% url 'book_delete' pk=book.pk %}" class="btn">Удалить</a>
+                </div>
+            {% empty %}
+                <p>Нет книг для отображения.</p>
+            {% endfor %}
+        </section>
     </main>
     
-    
+    <footer>
+        <p>© 2025 Магазин книг</p>
+    </footer>
 </body>
 </html>
