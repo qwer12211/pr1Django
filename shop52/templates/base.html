@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title_name %}Читай-город{% endblock %}</title>
+    {% block link_style %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                font-family: 'Arial', sans-serif;
+            }
+            .page-wrapper {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+            .main-content {
+                flex: 1 0 auto;
+                padding: 20px;
+                padding-bottom: 60px; /* Увеличен отступ снизу */
+            }
+            footer {
+                flex-shrink: 0;
+                background-color: #2c2c2c;
+                color: #fff;
+                padding: 40px 0;
+                width: 100%;
+                box-sizing: border-box;
+            }
+        </style>
+    {% endblock %}
+</head>
+<body>
+    <div class="page-wrapper">
+        {% block header %}
+            {% include '_inc/_header.html' %}
+        {% endblock %}
+        <main class="main-content">
+            {% block content %}
+            {% endblock %}
+        </main>
+        {% block footer %}
+            {% include '_inc/_footer.html' %}
+        {% endblock %}
+    </div>
+</body>
+</html>

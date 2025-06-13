@@ -1,7 +1,101 @@
-<h1>{% if form.instance.pk %} Реадктировать позицию {% else %} добавить новую позицию{% endif %} </h1>
-<form method ="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type = "submit">Сохранить</button>
-</form>
-<a href= "{% url 'book_list' %}"> вернуть к списку книг</a>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title_name %}
+    {% if form.instance.pk %}Редактирование книги{% else %}Добавление книги{% endif %}
+{% endblock %}
+
+{% block link_style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <style>
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        p {
+            margin: 0;
+        }
+        label {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input[type="text"],
+        input[type="file"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            align-self: center;
+        }
+        button:hover {
+            background-color: #27ae60;
+        }
+        a {
+            display: inline-block;
+            text-align: center;
+            color: #3498db;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+            transition: all 0.3s;
+            align-self: center;
+        }
+        a:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>{% if form.instance.pk %}Редактировать позицию{% else %}Добавить новую позицию{% endif %}</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="actions">
+                <button type="submit">Сохранить</button>
+                <a href="{% url 'book_list' %}">Вернуться к списку книг</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

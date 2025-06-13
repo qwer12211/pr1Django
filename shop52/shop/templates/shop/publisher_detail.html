@@ -1,6 +1,64 @@
-<h1> {{publisher.name}}</h1>
-<p>{{publisher.name}}</p>
-<p>Название {% if publisher.name %}Есть{% else %}Отсутствует{% endif %}</p>
-<a href="{% url 'publisher_list'%}"> Вернуться к списку издательств</a>
-<a href="{% url 'publisher_update' publisher.pk %}"> Редактировать</a>
-<a href="{% url 'publisher_delete' publisher.pk %}"> Удалить </a>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title_name %}
+    Информация об издательстве
+{% endblock %}
+
+{% block link_style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <style>
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        a {
+            display: inline-block;
+            text-align: center;
+            color: #3498db;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 5px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        a:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ publisher.name }}</h1>
+        <p>Название: {{ publisher.name }}</p>
+        <div class="actions">
+            <a href="{% url 'publisher_list' %}">Вернуться к списку издательств</a>
+            <a href="{% url 'publisher_update' publisher.pk %}">Редактировать</a>
+            <a href="{% url 'publisher_delete' publisher.pk %}">Удалить</a>
+        </div>
+    </div>
+{% endblock %}
